@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 
 import java.util.List;
 
@@ -28,16 +25,22 @@ class MowerIntegrationTest {
     void update_mowers_position(){
         MowersDetailsDto mowersDetailsDto = getMowersDetailsDto();
 
-        HttpHeaders headers = new HttpHeaders();
+        HttpHeaders headers = getHeaders();
 
         HttpEntity<MowersDetailsDto> entity = new HttpEntity<>(mowersDetailsDto,headers);
 
-        ResponseEntity<MowersUpdatedDto> response = restTemplate.exchange(getUrl(), HttpMethod.PUT, entity, MowersUpdatedDto.class);
+        ResponseEntity<MowersUpdatedDto> response = restTemplate.postForEntity(getUrl(),entity, MowersUpdatedDto.class);
         MowersUpdatedDto  actual = response.getBody();
 
 
         assertThat(actual).isNotNull();
         assertThat(actual.mowers()).isEqualTo(getMowerUpdatedDto());
+    }
+
+    private static HttpHeaders getHeaders() {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        return httpHeaders;
     }
 
     private String getUrl() {
