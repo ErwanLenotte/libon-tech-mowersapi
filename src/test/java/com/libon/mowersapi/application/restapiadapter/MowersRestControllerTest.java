@@ -23,7 +23,7 @@ class MowersRestControllerTest {
 
         when(mowersUpdate.updateMowers(mowersDetailsDto)).thenReturn(details);
 
-        MowersRestController controller = new MowersRestController();
+        MowersRestController controller = new MowersRestController(mowersUpdate);
         MowersUpdatedDto mowersUpdatedDto = controller.updateMowersPosition(mowersDetailsDto);
 
         assertThat(mowersUpdatedDto).isNotNull();
@@ -35,8 +35,8 @@ class MowersRestControllerTest {
 
 
     private List<MowerUpdatedDto> getMowerUpdatedDto() {
-        return List.of(new MowerUpdatedDto("mower1",new PositionDto(2,3),"N"),
-                new MowerUpdatedDto("mower2",new PositionDto(2,3),"N"));
+        return List.of(new MowerUpdatedDto("mower1",new PositionDto(1,3),"N"),
+                new MowerUpdatedDto("mower2",new PositionDto(5,1),"E"));
     }
 
     private static MowersDetailsDto getMowersDetailsDto() {
@@ -44,7 +44,7 @@ class MowersRestControllerTest {
         List<String> instructionsOne = List.of("G", "A", "G", "A", "G", "A", "G", "A", "A");
         MowerDto mowerOne = new MowerDto("mower1", new PositionDto(1, 2), "N", instructionsOne);
 
-        List<String> instructionsTwo = List.of("G", "A", "G", "A", "G", "A", "G", "A", "A");
+        List<String> instructionsTwo = List.of("A", "A", "D", "A", "A", "D", "A", "D", "D", "A");
         MowerDto mowerTwo = new MowerDto("mower2", new PositionDto(3, 3), "E", instructionsTwo);
 
         return new MowersDetailsDto(field, List.of(mowerOne, mowerTwo));
