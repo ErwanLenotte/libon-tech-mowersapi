@@ -1,23 +1,29 @@
 package com.libon.mowersapi.domain;
 
+import java.util.List;
+
 public class Mower {
     private static final Integer MIN_X = 0;
     private static final Integer MIN_Y = 0;
 
-    private String id;
-    private Integer maxX;
-    private Integer maxY;
+
+    private final String id;
+    private final Integer maxX;
+    private final Integer maxY;
     private Integer x;
     private Integer y;
     private OrientationEnum orientation;
+    private final List<InstructionEnum> instructions;
 
-    public Mower(String id, Integer maxX, Integer maxY, Integer x, Integer y, OrientationEnum orientation) {
+
+    public Mower(String id, Integer maxX, Integer maxY, Integer x, Integer y, OrientationEnum orientation, List<InstructionEnum> instructions) {
         this.id = id;
         this.maxX = maxX;
         this.maxY = maxY;
         this.x = x;
         this.y = y;
         this.orientation = orientation;
+        this.instructions = instructions;
     }
 
     public Integer getX() {
@@ -36,11 +42,11 @@ public class Mower {
         return id;
     }
 
-    public void changeDirection(InstructionEnum instruction) {
-        orientation = OrientationFactory.changeOrientation(orientation,instruction);
+    private void changeDirection(InstructionEnum instruction) {
+        orientation = OrientationFactory.changeOrientation(orientation, instruction);
     }
 
-    public void advance() {
+    private void advance() {
         switch (orientation) {
             case N -> {
                 if (y + 1 <= maxY) y++;
@@ -58,4 +64,14 @@ public class Mower {
     }
 
 
+    public Mower applyInstructions() {
+        for (InstructionEnum instruction : instructions) {
+            switch (instruction) {
+                case G, D -> this.changeDirection(instruction);
+                case A -> this.advance();
+            }
+        }
+
+        return this;
+    }
 }

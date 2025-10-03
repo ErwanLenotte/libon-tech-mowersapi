@@ -13,7 +13,10 @@ public class MowersUpdateUseCase {
 
         MowersDetailsDto details = Optional.ofNullable(mowersDetailsDto).orElse(new MowersDetailsDto(new FieldDto(0, 0), Collections.emptyList()));
         final FieldDto field = details.field();
-        List<MowerUpdatedDto> mowersUpdated = details.mowers().stream().map(mower -> this.moveMovers(field,mower)).map(this::mapToUpdateMower).toList();
+        List<MowerUpdatedDto> mowersUpdated = details.mowers().stream()
+                .map(mower -> this.moveMovers(field,mower))
+                .map(Mower::applyInstructions)
+                .map(this::mapToUpdateMower).toList();
 
         return new MowersUpdatedDto(mowersUpdated);
     }
@@ -24,15 +27,9 @@ public class MowersUpdateUseCase {
 
     private Mower moveMovers(FieldDto field, MowerDto mowerDto) {
         PositionDto positionDto = mowerDto.startPosition();
-        Mower mower = new Mower(mowerDto.id(), field.maxX(), field.maxX(), positionDto.x(), positionDto.y(), OrientationEnum.valueOf(mowerDto.orientation()));
+        List<InstructionEnum> instructions = mowerDto.instructions().stream().map(InstructionEnum::valueOf).toList();
 
-        for (String instruction : mowerDto.instructions()){
-            InstructionEnum instructionEnum = InstructionEnum.valueOf(instruction);
-            switch (instructionEnum){
-                case G,D -> mower.changeDirection(instructionEnum);
-                case A -> mower.advance();
-            }
-        }
-        return mower;
+        return new Mower(mowerDto.id(), field.maxX(), field.maxX(), positionDto.x(), positionDto.y(),
+                OrientationEnum.valueOf(mowerDto.orientation()),instructions);
     }
 }
