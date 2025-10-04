@@ -22,7 +22,7 @@ Critiques :
     _ Springboot propose une module cloud je n'ai pas prit le temps de creuser
     _ Dans le GlobalExceptionHandler, je devrais créer un objet pour formatter le retour d'erreur et ajouter des champs du type url, version l'api, timespant...
     _ exclude ce fichier du package
-
+    _ bosser sur des branches plutôt que commit sur master directement..
  Retour:
     _ Dans l'énoncé il n'y a pas marqué qu'il fallait retourné l'id du mower je l'ai rajouté sinon je ne vois pas comment l'appelant peut mettre à jour de son côté
     _ Tout est en anglais sauf les instructions qui sont A pour avancer G pour gauge et D droite, cela devrait être A advance, L left et R right.
