@@ -1,0 +1,27 @@
+Voici les choses qui pourrait être mis en place :
+    _ gestion des fichiers de properties par profile/env pour avoir des ports différent ou láctivation d'open api selon l'env
+    _ ajouter un caching étant donné qu'une fois calculé le résultat ne devrait pas bouger
+        ( https://docs.spring.io/spring-boot/reference/io/caching.html )
+    _ ajouter un rate limiting dans l'application ou via une gateaway
+        ( par exemple https://www.geeksforgeeks.org/advance-java/implementing-rate-limiting-in-a-spring-boot-application )
+    _ passer en Spring WebFlux ? ( censé être plus adapté pour les api mais plus compliqué à debuggè)
+    _ d'autres façon de gérer le versionage d'api sont possible ( par header, en argument)
+    _ il manque un système de logging
+    _ est-ce qu'il faut ajouter un système de sécurité avec une clé d'api et gestion de cqrs ?
+Critiques :
+    _ Est-ce que utiliser post était le bon verbe vs put ?
+    _ Les tests d'intégration ne couvre pas les cas d'erreurs
+    _ J'aurais pu utiliser le générateur d'openapi pour générer le controlleur à partir du specification qui ferait office de doc et de contrat d'api
+    _ Il manque probablement des tests d'edge case pour les différentes méthodes
+    _ On pourrait renvoyer MowersDetails complet avec les champs supplémentaires end_position et end_orientation
+    _ Mower fait peut être un trop de chose
+    _ On pourrait peut être mieux modiliser les instructions en séparant celles qui changent la direction vs celle qui fait avancer
+    _ J'ai l'impression que la methode advance() de mower pourrait être mieux écrite
+    _ J'ai mappé à la main mais on pourrait une librairie si on veut
+    _ Springboot propose une module docker je n'ai pas prit le temps de creuser
+    _ Springboot propose une module cloud je n'ai pas prit le temps de creuser
+
+
+ Retour:
+    _ Dans l'énoncé il n'y a pas marqué qu'il fallait retourné l'id du mower je l'ai rajouté sinon je ne vois pas comment l'appelant peut mettre à jour de son côté
+    _ Tout est en anglais sauf les instructions qui sont A pour avancer G pour gauge et D droite, cela devrait être A advance, L left et R right.
