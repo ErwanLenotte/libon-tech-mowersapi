@@ -53,24 +53,32 @@ public class Mower {
 
     public void advance() {
         switch (orientation) {
-            case N -> {
-                if (y + 1 <= maxY) y++;
-            }
-            case S -> {
-                if (y - 1 >= MIN_Y) y--;
-            }
-            case W -> {
-                if (x - 1 >= MIN_X) x--;
-            }
-            case E -> {
-                if (x + 1 <= maxX) x++;
-            }
+            case N -> goNorth();
+            case S -> goSouth();
+            case W -> goWest();
+            case E -> goEast();
         }
     }
 
-
     public Mower applyInstructions() {
-        instructions.stream().forEachOrdered( instruction -> instruction.applyToMower(this));
+        instructions.stream().forEach( instruction -> instruction.applyToMower(this));
         return this;
     }
+
+    private void goEast() {
+        if (x + 1 <= maxX) x++;
+    }
+
+    private void goWest() {
+        if (x - 1 >= MIN_X) x--;
+    }
+
+    private void goSouth() {
+        if (y - 1 >= MIN_Y) y--;
+    }
+
+    private void goNorth() {
+        if (y + 1 <= maxY) y++;
+    }
+
 }
