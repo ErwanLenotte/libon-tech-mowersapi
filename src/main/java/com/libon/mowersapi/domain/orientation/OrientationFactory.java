@@ -9,10 +9,10 @@ import static com.libon.mowersapi.domain.orientation.OrientationEnum.*;
 
 public class OrientationFactory {
 
-    private static Map<DirectionEnum,OrientationEnum> northMap = Map.of(G, W, D, E);
-    private static Map<DirectionEnum,OrientationEnum> southMap = Map.of(G, E, D, W);
-    private static Map<DirectionEnum,OrientationEnum> westMap = Map.of(G, S, D, N);
-    private static Map<DirectionEnum,OrientationEnum> eastMap = Map.of(G, N, D, S);
+    private static final Map<DirectionEnum,OrientationEnum> northMap = Map.of(G, W, D, E);
+    private static final Map<DirectionEnum,OrientationEnum> southMap = Map.of(G, E, D, W);
+    private static final  Map<DirectionEnum,OrientationEnum> westMap = Map.of(G, S, D, N);
+    private static final Map<DirectionEnum,OrientationEnum> eastMap = Map.of(G, N, D, S);
 
 
     private OrientationFactory() {

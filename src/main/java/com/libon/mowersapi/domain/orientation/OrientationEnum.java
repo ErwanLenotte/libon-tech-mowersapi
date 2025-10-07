@@ -5,5 +5,5 @@ public enum OrientationEnum {
     N,
     S,
     W,
-    E;
+    E
 }

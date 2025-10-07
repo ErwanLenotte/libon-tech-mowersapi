@@ -61,7 +61,7 @@ public class Mower {
     }
 
     public Mower applyInstructions() {
-        instructions.stream().forEach( instruction -> instruction.applyToMower(this));
+        instructions.forEach(instruction -> instruction.applyToMower(this));
         return this;
     }
 
