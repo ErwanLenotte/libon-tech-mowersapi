@@ -2,7 +2,7 @@ package com.libon.mowersapi.application.restapiadapter;
 
 
 import com.libon.mowersapi.application.restapiadapter.dto.*;
-import com.libon.mowersapi.domain.MowersUpdateUseCase;
+import com.libon.mowersapi.domain.mower.MowersUpdateUseCase;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

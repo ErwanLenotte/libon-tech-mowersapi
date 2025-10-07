@@ -2,7 +2,7 @@ package com.libon.mowersapi.application.restapiadapter;
 
 import com.libon.mowersapi.application.restapiadapter.dto.MowersUpdatedDto;
 import com.libon.mowersapi.application.restapiadapter.dto.MowersDetailsDto;
-import com.libon.mowersapi.domain.MowersUpdateUseCase;
+import com.libon.mowersapi.domain.mower.MowersUpdateUseCase;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

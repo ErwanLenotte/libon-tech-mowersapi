@@ -1,4 +1,4 @@
-package com.libon.mowersapi.domain;
+package com.libon.mowersapi.domain.mower;
 
 import com.libon.mowersapi.application.restapiadapter.dto.*;
 import org.junit.jupiter.api.Test;

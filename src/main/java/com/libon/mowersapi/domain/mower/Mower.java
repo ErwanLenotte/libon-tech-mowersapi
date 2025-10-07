@@ -1,22 +1,27 @@
-package com.libon.mowersapi.domain;
+package com.libon.mowersapi.domain.mower;
+
+import com.libon.mowersapi.domain.instruction.DirectionEnum;
+import com.libon.mowersapi.domain.instruction.Instruction;
+import com.libon.mowersapi.domain.orientation.OrientationEnum;
+import com.libon.mowersapi.domain.orientation.OrientationFactory;
 
 import java.util.List;
 
 public class Mower {
-    private static final Integer MIN_X = 0;
-    private static final Integer MIN_Y = 0;
+    private static final int MIN_X = 0;
+    private static final int MIN_Y = 0;
 
 
     private final String id;
     private final Integer maxX;
     private final Integer maxY;
-    private Integer x;
-    private Integer y;
+    private int x;
+    private int y;
     private OrientationEnum orientation;
-    private final List<InstructionEnum> instructions;
+    private final List<Instruction> instructions;
 
 
-    public Mower(String id, Integer maxX, Integer maxY, Integer x, Integer y, OrientationEnum orientation, List<InstructionEnum> instructions) {
+    public Mower(String id, int maxX, int maxY, int x, int y, OrientationEnum orientation, List<Instruction> instructions) {
         this.id = id;
         this.maxX = maxX;
         this.maxY = maxY;
@@ -26,11 +31,11 @@ public class Mower {
         this.instructions = instructions;
     }
 
-    public Integer getX() {
+    public int getX() {
         return x;
     }
 
-    public Integer getY() {
+    public int getY() {
         return y;
     }
 
@@ -42,11 +47,11 @@ public class Mower {
         return id;
     }
 
-    private void changeDirection(InstructionEnum instruction) {
-        orientation = OrientationFactory.changeOrientation(orientation, instruction);
+    public void changeDirection(DirectionEnum direction) {
+        orientation = OrientationFactory.changeOrientation(orientation, direction);
     }
 
-    private void advance() {
+    public void advance() {
         switch (orientation) {
             case N -> {
                 if (y + 1 <= maxY) y++;
@@ -65,13 +70,7 @@ public class Mower {
 
 
     public Mower applyInstructions() {
-        for (InstructionEnum instruction : instructions) {
-            switch (instruction) {
-                case G, D -> this.changeDirection(instruction);
-                case A -> this.advance();
-            }
-        }
-
+        instructions.stream().forEachOrdered( instruction -> instruction.applyToMower(this));
         return this;
     }
 }

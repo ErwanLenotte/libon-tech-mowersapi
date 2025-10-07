@@ -1,9 +1,9 @@
-package com.libon.mowersapi.domain;
+package com.libon.mowersapi.domain.orientation;
 
 import org.junit.jupiter.api.Test;
 
-import static com.libon.mowersapi.domain.InstructionEnum.*;
-import static com.libon.mowersapi.domain.OrientationEnum.*;
+import static com.libon.mowersapi.domain.instruction.DirectionEnum.*;
+import static com.libon.mowersapi.domain.orientation.OrientationEnum.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class OrientationFactoryTest {

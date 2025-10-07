@@ -1,4 +1,4 @@
-package com.libon.mowersapi.domain;
+package com.libon.mowersapi.domain.orientation;
 
 
 public enum OrientationEnum {
