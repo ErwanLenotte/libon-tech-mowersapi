@@ -6,6 +6,7 @@ import com.libon.mowersapi.domain.orientation.OrientationEnum;
 import com.libon.mowersapi.domain.orientation.OrientationFactory;
 
 import java.util.List;
+import java.util.Optional;
 
 public class Mower {
     private static final int MIN_X = 0;
@@ -48,16 +49,19 @@ public class Mower {
     }
 
     public void changeDirection(DirectionEnum direction) {
-        orientation = OrientationFactory.changeOrientation(orientation, direction);
+        Optional.ofNullable(direction).ifPresent(d -> orientation = OrientationFactory.changeOrientation(orientation, d) );
     }
 
     public void advance() {
-        switch (orientation) {
-            case N -> goNorth();
-            case S -> goSouth();
-            case W -> goWest();
-            case E -> goEast();
-        }
+        Optional.ofNullable(orientation).ifPresent(o -> {
+                    switch (o) {
+                        case N -> goNorth();
+                        case S -> goSouth();
+                        case W -> goWest();
+                        case E -> goEast();
+                    }
+                }
+        );
     }
 
     public Mower applyInstructions() {
